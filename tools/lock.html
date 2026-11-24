@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" class="staticrypt-html">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>/*[|template_title|]*/0</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141716" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Home Hunt">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta http-equiv="cache-control" content="max-age=0">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="pragma" content="no-cache">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{
+  --bg:#f6f5f1; --panel:#ffffff; --ink:#1d2321; --muted:#5d6763; --line:#dcdcd4; --red:#d33b2f; --bad:#b42318;
+  --btn:#1d2321; --btnInk:#ffffff; --focus:#2f62b5;
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#141716; --panel:#1c201f; --ink:#e9ece8; --muted:#a3aba7; --line:#333937; --red:#ff6b5e; --bad:#ff8a7a;
+  --btn:#e9ece8; --btnInk:#141716; --focus:#6d9cf0; color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+  padding:max(24px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+  display:flex;align-items:center;justify-content:center;min-height:100vh;min-height:100dvh}
+::selection{background:var(--red);color:#fff}
+.hidden{display:none!important}
+.card{width:100%;max-width:380px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:28px 24px 24px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
+.mark{display:block;width:44px;height:44px;margin-bottom:14px}
+h1{font:700 28px/1.1 var(--display);margin:0 0 8px;text-wrap:balance}
+p{margin:0 0 18px;color:var(--muted);font-size:15px}
+label.pw{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.field{display:flex;border:1px solid var(--line);border-radius:10px;background:var(--bg);overflow:hidden}
+.field:focus-within{outline:2px solid var(--focus);outline-offset:1px}
+.field input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:17px/1.2 var(--body);padding:13px 12px;outline:0;caret-color:var(--red)}
+.field button{border:0;border-left:1px solid var(--line);background:transparent;color:var(--muted);font:700 13px/1 var(--body);padding:0 14px;cursor:pointer}
+.field button:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+.err{color:var(--bad);font-size:14px;font-weight:700;margin:8px 0 0;min-height:1.2em}
+.remember{display:flex;align-items:center;gap:10px;margin:12px 0 18px;font-size:15px;cursor:pointer}
+.remember input{width:20px;height:20px;accent-color:var(--red);margin:0}
+.go{width:100%;border:0;border-radius:10px;background:var(--btn);color:var(--btnInk);font:700 16px/1 var(--body);padding:15px;cursor:pointer}
+.go:hover{opacity:.92}
+.go:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.go[disabled]{opacity:.6;cursor:progress}
+.spin{width:28px;height:28px;border:3px solid var(--line);border-top-color:var(--red);border-radius:50%;animation:s 1s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.spin{animation-duration:3s}}
+</style>
+</head>
+<body class="staticrypt-body">
+<div id="staticrypt_loading"><div class="spin" role="status" aria-label="Opening the map"></div></div>
+<main id="staticrypt_content" class="card hidden">
+  <svg class="mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4c-8.3 0-15 6.5-15 14.6C9 29.5 24 44 24 44s15-14.5 15-25.4C39 10.5 32.3 4 24 4z" fill="#d33b2f"/><path d="M16 21.5 24 15l8 6.5V30H16z" fill="#fff"/><rect x="21.5" y="24" width="5" height="6" fill="#d33b2f"/></svg>
+  <h1>/*[|template_title|]*/0</h1>
+  <p>/*[|template_instructions|]*/0</p>
+  <form id="staticrypt-form" action="#" method="post" novalidate>
+    <label class="pw" for="staticrypt-password">Password</label>
+    <div class="field">
+      <input id="staticrypt-password" type="password" name="password" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="/*[|template_placeholder|]*/0">
+      <button type="button" id="pw-toggle" aria-pressed="false" aria-controls="staticrypt-password">Show</button>
+    </div>
+    <div class="err" id="pw-err" aria-live="polite"></div>
+    <label id="staticrypt-remember-label" class="remember hidden"><input id="staticrypt-remember" type="checkbox" name="remember" checked>/*[|template_remember|]*/0</label>
+    <button type="submit" class="go" id="go">/*[|template_button|]*/0</button>
+  </form>
+</main>
+<script>
+const staticryptInitiator = /*[|js_staticrypt|]*/ 0;
+const templateError = "/*[|template_error|]*/0",
+  templateToggleAltShow = "/*[|template_toggle_show|]*/0",
+  templateToggleAltHide = "/*[|template_toggle_hide|]*/0",
+  isRememberEnabled = /*[|is_remember_enabled|]*/ 0,
+  staticryptConfig = /*[|staticrypt_config|]*/ 0;
+const templateConfig = {rememberExpirationKey:"staticrypt_expiration",rememberPassphraseKey:"staticrypt_passphrase",replaceHtmlCallback:null,clearLocalStorageCallback:null};
+const staticrypt = staticryptInitiator.init(staticryptConfig, templateConfig);
+window.onload = async function () {
+  const { isSuccessful } = await staticrypt.handleDecryptOnLoad();
+  if (!isSuccessful) {
+    document.getElementById("staticrypt_loading").classList.add("hidden");
+    document.getElementById("staticrypt_content").classList.remove("hidden");
+    if (isRememberEnabled) document.getElementById("staticrypt-remember-label").classList.remove("hidden");
+    document.getElementById("staticrypt-password").focus();
+  }
+};
+const pw = document.getElementById("staticrypt-password"), tg = document.getElementById("pw-toggle"), err = document.getElementById("pw-err"), go = document.getElementById("go");
+tg.addEventListener("click", function () {
+  const show = pw.type === "password";
+  pw.type = show ? "text" : "password";
+  tg.textContent = show ? "Hide" : "Show";
+  tg.setAttribute("aria-pressed", String(show));
+  tg.setAttribute("aria-label", show ? templateToggleAltHide : templateToggleAltShow);
+  pw.focus();
+});
+pw.addEventListener("input", function () { err.textContent = ""; });
+document.getElementById("staticrypt-form").addEventListener("submit", async function (e) {
+  e.preventDefault();
+  if (!pw.value) { err.textContent = "Type the password first."; pw.focus(); return; }
+  go.disabled = true; go.textContent = "Opening…";
+  const { isSuccessful } = await staticrypt.handleDecryptionOfPage(pw.value, document.getElementById("staticrypt-remember").checked);
+  if (!isSuccessful) {
+    go.disabled = false; go.textContent = "/*[|template_button|]*/0";
+    err.textContent = templateError; pw.select();
+  }
+});
+</script>
+</body>
+</html>
