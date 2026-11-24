@@ -1,7 +1,10 @@
 """Turn the satellite edition of the Home Hunt Map into the phone web version
 (location dot, Directions, drive time, nearest-first), before it gets password-locked.
 Usage: python3 mkweb.py <Home-Hunt-Map-Satellite.html> <out.html>"""
-import re, sys
+import os, re, sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+PHONE_CSS = open(os.path.join(HERE, 'phone.css'), encoding='utf-8').read()
+PHONE_JS = open(os.path.join(HERE, 'phone.js'), encoding='utf-8').read()
 
 src, out = sys.argv[1], sys.argv[2]
 t = open(src, encoding='utf-8').read()
@@ -24,7 +27,8 @@ rep('<title>Home Hunt Map (Satellite)</title>', '''<title>Home Hunt Map</title>
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Home Hunt">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="icon-180.png">''')
+<link rel="apple-touch-icon" href="icon-180.png">
+<script>try{if(matchMedia('(max-width: 759px)').matches)document.documentElement.classList.add('phone')}catch(e){}</script>''')
 
 # ---- styles
 CSS = '''
@@ -32,6 +36,7 @@ CSS = '''
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--you:#5b9cff;--youRing:#101312}}
 :root[data-theme="dark"]{--you:#5b9cff;--youRing:#101312}
 ::selection{background:var(--red);color:#fff}
+[hidden]{display:none!important}
 .upd{font-size:13px;color:var(--muted);margin:6px 0 0;font-variant-numeric:tabular-nums}
 .you{position:absolute;left:0;top:0;width:18px;height:18px;border-radius:50%;background:var(--you);border:3px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.45);transform:translate(-50%,-50%)}
 .you::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--you);opacity:0;animation:youping 2.4s cubic-bezier(.16,1,.3,1) infinite}
@@ -65,7 +70,7 @@ CSS = '''
 .pp-drive b{color:var(--ink);font-variant-numeric:tabular-nums}
 .dist{font-size:12.5px;font-weight:700;color:var(--you);font-variant-numeric:tabular-nums}
 '''
-rep('.leaflet-control-attribution{font-size:10px}\n</style>', '.leaflet-control-attribution{font-size:10px}\n' + CSS + '</style>')
+rep('.leaflet-control-attribution{font-size:10px}\n</style>', '.leaflet-control-attribution{font-size:10px}\n' + CSS + PHONE_CSS + '</style>')
 
 # ---- markup
 rep('Search by address or ZIP, or tap a marker or a row for details.</p>',
@@ -129,7 +134,7 @@ const LocCtl=L.Control.extend({options:{position:'topleft'},onAdd(){const d=L.Do
   d.innerHTML='<button type="button" aria-pressed="false" aria-label="Show where I am" title="Show where I am">'+ICON.loc+'</button>';
   locBtn=d.firstChild;L.DomEvent.disableClickPropagation(d);
   locBtn.addEventListener('click',()=>{if(!you.watch)startLoc(true);else if(you.pos)map.setView([you.pos.lat,you.pos.lng],Math.max(map.getZoom(),14));});return d}});
-map.addControl(new LocCtl());
+const locCtl=new LocCtl();map.addControl(locCtl);
 
 function startLoc(center){
   if(!('geolocation' in navigator)||!window.isSecureContext){note('<span class="err">This browser can\'t share your location with this page.</span>');return}
@@ -152,7 +157,7 @@ function onPos(p){
   lsSet('hh-loc','1');btnState();
   note('<span>You\'re the blue dot (accurate to about '+(you.pos.acc<1000?Math.max(5,Math.round(you.pos.acc/5)*5)+' m':(you.pos.acc/1609.344).toFixed(1)+' mi')+').</span><button type="button" class="linkbtn" data-stop>Stop showing my location</button>');
   you.waiters.splice(0).forEach(w=>w.ok(you.pos));
-  const el=document.querySelector('.leaflet-popup .pp-you');
+  const el=document.querySelector('.leaflet-popup .pp-you, #pane-home .pp-you');
   if(el){const d=el.querySelector('.pp-dist');if(d)d.innerHTML=distLine(H[+el.dataset.i])}
   if(first||!you.lastRender||miles(you.lastRender,you.pos)>0.1){for(const k in driveShown)delete driveShown[k];you.lastRender={lat:you.pos.lat,lng:you.pos.lng};render()}
 }
@@ -208,6 +213,8 @@ rep('// ---- filters', JS + '\n// ---- filters')
 rep("const ABBR={", '''const fo=document.getElementById('f-ord');const ordBtns=[];
 [['rank','By rank'],['near','Nearest first']].forEach(([k,l])=>{ordBtns.push([k,chip(fo,l,k==='rank',()=>{state.order=k;ordBtns.forEach(([kk,bb])=>bb.setAttribute('aria-pressed',String(kk===k)));if(k==='near'&&!you.watch)startLoc(false);render()})])});
 const ABBR={''')
+
+rep('render();zipShow();\n})();', PHONE_JS + '\nrender();zipShow();\n})();')
 
 open(out, 'w', encoding='utf-8').write(t)
 print('ok', out, len(t), 'as of', asof)
