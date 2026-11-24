@@ -73,8 +73,9 @@ CSS = '''
 rep('.leaflet-control-attribution{font-size:10px}\n</style>', '.leaflet-control-attribution{font-size:10px}\n' + CSS + PHONE_CSS + '</style>')
 
 # ---- markup
-rep('Search by address or ZIP, or tap a marker or a row for details.</p>',
-    'Search by address or ZIP, or tap a marker or a row for details. Tap the target button on the map to see where you are; each home\'s pop-up has Directions and the drive time from you.</p>\n    <p class="upd">Sheet data as of ' + asof + '</p>')
+rep('or tap a marker or a row for details.',
+    'or tap a marker or a row for details. Tap the target button on the map to see where you are; each home\'s pop-up has Directions and the drive time from you.')
+rep('</p>\n  </header>', '</p>\n    <p class="upd">Sheet data as of ' + asof + '</p>\n  </header>')
 rep('<div class="grp" id="f-zip"><span>Show</span></div>',
     '<div class="grp" id="f-zip"><span>Show</span></div>\n    <div class="grp" id="f-ord"><span>Order</span></div>')
 rep('<div id="map" role="region" aria-label="Map of homes"></div>',
