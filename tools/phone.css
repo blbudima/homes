@@ -88,6 +88,9 @@ html.phone,html.phone body{height:100%;overflow:hidden;overscroll-behavior:none}
 .tag.ok{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent)}
 .tag.bad{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .tag.red{color:var(--red);background:var(--redfill)}
+.tag.st{color:var(--tC);background:color-mix(in srgb,var(--tC) 14%,transparent)}
+#pane-filters .grp-price .prange{width:100%}
+#pane-filters .pnote{width:100%}
 .tag.fav{color:var(--starInk,#9a6a00);background:color-mix(in srgb,var(--star,#f2b705) 18%,transparent)}
 .tag.near{color:var(--you);background:color-mix(in srgb,var(--you) 12%,transparent)}
 .lst-empty{color:var(--muted);font-size:15px;padding:8px 0 4px}

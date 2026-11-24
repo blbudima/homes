@@ -215,7 +215,7 @@ rep("const ABBR={", '''const fo=document.getElementById('f-ord');const ordBtns=[
 [['rank','By rank'],['near','Nearest first']].forEach(([k,l])=>{ordBtns.push([k,chip(fo,l,k==='rank',()=>{state.order=k;ordBtns.forEach(([kk,bb])=>bb.setAttribute('aria-pressed',String(kk===k)));if(k==='near'&&!you.watch)startLoc(false);render()})])});
 const ABBR={''')
 
-rep('render();zipShow();\n})();', PHONE_JS + '\nrender();zipShow();\n})();')
+rep('render();zipShow();', PHONE_JS + '\nrender();zipShow();')
 
 open(out, 'w', encoding='utf-8').write(t)
 print('ok', out, len(t), 'as of', asof)

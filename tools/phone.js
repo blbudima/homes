@@ -52,8 +52,10 @@ if(PHONE){
   function changedGroups(){let n=0;
     Object.entries(RADIO).forEach(([g,l])=>{const b=[...document.querySelectorAll('#'+g+' .chip')].find(x=>x.textContent===l);if(b&&b.getAttribute('aria-pressed')!=='true')n++});
     ['f-typ','f-nb','f-tier','f-zip'].forEach(g=>{if([...document.querySelectorAll('#'+g+' .chip')].some(b=>(b.getAttribute('aria-pressed')==='true')!==wantOn(g,b)))n++});
+    if(state.max!==DEFAULTS.max)n++;
     return n}
   reset.addEventListener('click',()=>{
+    if(state.max!==DEFAULTS.max)setMax(DEFAULTS.max);
     Object.entries(RADIO).forEach(([g,l])=>{const b=[...document.querySelectorAll('#'+g+' .chip')].find(x=>x.textContent===l);if(b&&b.getAttribute('aria-pressed')!=='true')b.click()});
     ['f-typ','f-nb','f-tier','f-zip'].forEach(g=>document.querySelectorAll('#'+g+' .chip').forEach(b=>{if((b.getAttribute('aria-pressed')==='true')!==wantOn(g,b))b.click()}));
   });
@@ -135,7 +137,7 @@ if(PHONE){
       '<span class="hc-a">'+esc(short(h.a))+'</span>'+
       '<span class="hc-meta">'+esc(KS[h.kind])+(h.nb!=='0'?', '+esc(NBT[h.nb].toLowerCase()):'')+' · '+esc(h.beds)+' bd / '+esc(h.baths)+' ba · HOA '+esc(h.hoa)+'</span>'+
       (h.why?'<span class="hc-why">'+esc(h.why)+'</span>':'')+
-      '<span class="hc-tags">'+(h.fav?'<span class="tag fav">★ Shortlist</span>':'')+(mi!=null?'<span class="tag near">'+fmtMi(mi)+' away</span>':'')+comp+red+(h.lat==null?'<span class="tag">No map pin</span>':'')+'</span></button>'}
+      '<span class="hc-tags">'+(isStretch(h)?'<span class="tag st">Stretch: over $1.35M</span>':'')+(h.fav?'<span class="tag fav">★ Shortlist</span>':'')+(mi!=null?'<span class="tag near">'+fmtMi(mi)+' away</span>':'')+comp+red+(h.lat==null?'<span class="tag">No map pin</span>':'')+'</span></button>'}
   function renderCards(){
     const vis=H.filter(visible);
     document.getElementById('b-n').textContent=vis.length;
