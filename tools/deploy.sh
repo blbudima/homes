@@ -17,6 +17,6 @@ git diff --cached --quiet && { echo "no changes"; exit 0; }
 git commit -q -m "Update map${when:+ (sheet data as of $when)}
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
-Claude-Session: https://claude.ai/code/session_01FY5VeT6Q8GQssXtfkvJtyW"
+Claude-Session: https://claude.ai/code/session_01FY5VeVtdXoEwj1t1Hbru9d"
 git -c push.negotiate=true push -q origin HEAD:main
 echo "pushed"
